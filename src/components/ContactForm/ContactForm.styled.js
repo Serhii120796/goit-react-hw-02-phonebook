@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import { Form, Field, ErrorMessage } from 'formik';
-
-
-// Пусті стилі
-export const StyleForm = styled(Form)``;
+import { Field, ErrorMessage } from 'formik';
 
 export const FormWraper = styled.div`
   display: flex;
@@ -22,18 +18,15 @@ export const InputTitle = styled.span`
 `;
 
 export const FieldWraper = styled.span`
-position: relative;
+display: block;
+margin-bottom: ${p => p.theme.spasing(5)};
 `;
 
 export const StyleField = styled(Field)`
   display: block;
-  margin-bottom: ${p => p.theme.spasing(5)};
   border: ${p => p.theme.borders.grey};
 `;
 
 export const StyleErrorMessage = styled(ErrorMessage)`
-position: absolute;
-left: 0;
-top: 100%;
 color: ${p => p.theme.colors.error};
 `;

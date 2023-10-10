@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ContactData = styled.p`
 margin-right: ${p => p.theme.spasing(3)};
 font-weight: 600;
+text-transform: capitalize;
 `;
 
 export const Button = styled.button`

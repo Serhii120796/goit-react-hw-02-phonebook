@@ -5,6 +5,7 @@ import 'modern-normalize';
 export const GlobalStyle = createGlobalStyle`
 body {
   margin: 0;
+  padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -22,7 +23,11 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6{
+  margin: 0;
+  padding-bottom: 20px;
+}
+
 p {
   margin: 0;
 }
@@ -34,7 +39,6 @@ h2 {
 
 ul,
 ol {
-  // padding: 0;
   margin: 0;
 }
 

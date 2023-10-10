@@ -1,17 +1,23 @@
-import { Formik } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
-import { StyleForm, FormWraper, InputTitle, FieldWraper, StyleField, StyleErrorMessage} from './ContactForm.styled';
+import { FormWraper, InputTitle, FieldWraper, StyleField, StyleErrorMessage} from './ContactForm.styled';
 import { Button } from '../ContactItem/ContactItem.styled';
 
 const schema = yup.object().shape({
-  name: yup.string().min(2, 'Enter a name').required("Enter a name"),
-  number: yup.number().min(9, 'Enter a name').required('Enter a phone number'),
+  name: yup.string().min(2).required("Enter a name"),
+  number: yup.string().matches(/^\d{9,}$/, 'Enter a phone number with at least 9 digits').required('Enter a phone number'),
 });
 
-export const ContactForm = ({addContact}) => {
+export const ContactForm = ({addContact, allContacts}) => {
 
   const handleSubmit = (values, { resetForm }) => {
-    addContact(values)
+    const checkContact = allContacts.some(contact => contact.name.toLowerCase() === values.name.toLowerCase());
+    if (checkContact) {
+      alert(`${values.name} is already in contacts`);
+      return
+    }
+
+    addContact(values);
     resetForm();
   };
 
@@ -24,7 +30,7 @@ export const ContactForm = ({addContact}) => {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <StyleForm autoComplete="off">
+      <Form autoComplete="off">
         <FormWraper>
           <label>
             <InputTitle>Name</InputTitle>
@@ -43,7 +49,7 @@ export const ContactForm = ({addContact}) => {
           </label>
           <Button type="submit">Add contact</Button>
         </FormWraper>
-      </StyleForm>
+      </Form>
     </Formik>
   );
 };

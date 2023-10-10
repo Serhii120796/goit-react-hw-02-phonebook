@@ -7,7 +7,8 @@ display: block;
     margin-bottom: ${p => p.theme.spasing(3)};
 `;
 
-export const Input = styled.span`
+export const StyleInput = styled.input`
     display: block;
     margin-bottom: ${p => p.theme.spasing(5)};
+    border: ${p => p.theme.borders.grey};
 `;
