@@ -1,12 +1,48 @@
+import { nanoid } from 'nanoid';
 import { Component } from 'react';
+import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
+import { ContactList } from './ContactsList/ContactsList';
 
 export class App extends Component {
   state = {
-  contacts: [],
-  name: ''
-  }
-  
+    contacts: [],
+    filter: '',
+  };
+
+  addContact = newContact => {
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, { ...newContact, id: nanoid()}],
+    }));
+  };
+
+  findContact = contact => {
+    this.setState({ filter: contact });
+  };
+
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => id !== contact.id),
+    }));
+  };
+
   render() {
-    return <></>;
+    const { contacts, filter } = this.state;
+    const visibleContacts = contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    return (
+      <div>
+        <h1>Phonebook</h1>
+        <ContactForm addContact={ this.addContact} />
+        <h2>Contacts</h2>
+        <Filter findContact={this.findContact} />
+        <ContactList
+          contactList={visibleContacts}
+          deleteContact={this.deleteContact}
+        />
+      </div>
+    );
   }
 }
